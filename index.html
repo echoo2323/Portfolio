@@ -1,0 +1,1352 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Pranav Kumar — Portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --glass: rgba(255, 255, 255, 0.16);
+            --glass-dark: rgba(20, 20, 25, 0.72);
+            --border: rgba(255, 255, 255, 0.22);
+            --text: #fff;
+            --muted: rgba(255, 255, 255, 0.68);
+        }
+
+        body {
+            font-family:
+                -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+                sans-serif;
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            background:
+                radial-gradient(circle at 20% 20%, #6246ea 0%, transparent 30%),
+                radial-gradient(circle at 80% 30%, #007aff 0%, transparent 30%),
+                radial-gradient(circle at 50% 90%, #ff375f 0%, transparent 30%),
+                linear-gradient(135deg, #080b1c, #16152e 50%, #050611);
+        }
+
+        /* =========================
+       DESKTOP
+    ========================= */
+
+        .desktop {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* =========================
+       MENU BAR
+    ========================= */
+
+        .menu-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 32px;
+            z-index: 9999;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 14px;
+
+            background: rgba(20, 20, 25, 0.45);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .menu-left,
+        .menu-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .apple {
+            font-size: 18px;
+        }
+
+        .menu-item {
+            cursor: default;
+            opacity: 0.9;
+        }
+
+        .menu-item:hover {
+            opacity: 1;
+        }
+
+        /* =========================
+        DESKTOP ICONS
+    ========================= */
+
+        .desktop-icons {
+            position: absolute;
+            top: 60px;
+            right: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            width: 90px;
+        }
+
+        .desktop-icon {
+            width: 80px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+
+        .desktop-icon:hover {
+            transform: scale(1.06);
+        }
+
+        .desktop-icon.selected {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+        }
+
+        .icon-image {
+            width: 55px;
+            height: 55px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            filter: drop-shadow(0 5px 8px rgba(0, 0, 0, 0.35));
+        }
+
+        .icon-name {
+            font-size: 12px;
+            margin-top: 5px;
+            text-shadow: 0 2px 5px #000;
+            word-break: break-word;
+        }
+
+        /* =========================
+        CENTER HERO
+    ========================= */
+
+        .hero {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -55%);
+            text-align: center;
+
+            pointer-events: none;
+        }
+
+        .hero-avatar {
+            width: 110px;
+            height: 110px;
+
+            border-radius: 50%;
+            margin: 0 auto 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 50px;
+
+            background: linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.35),
+                    rgba(255, 255, 255, 0.08));
+
+            border: 1px solid rgba(255, 255, 255, 0.3);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.3),
+                inset 0 0 30px rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(15px);
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 70px);
+            font-weight: 700;
+            letter-spacing: -3px;
+
+            background: linear-gradient(90deg, #fff, #c9c9ff, #fff);
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .hero small {
+            display: block;
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* =========================
+        WINDOWS
+    ========================= */
+
+        .window {
+            position: absolute;
+
+            width: 650px;
+            max-width: calc(100vw - 30px);
+            height: 450px;
+            max-height: calc(100vh - 100px);
+
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            display: none;
+            flex-direction: column;
+
+            background: rgba(25, 25, 30, 0.75);
+
+            border: 1px solid var(--border);
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 35px 80px rgba(0, 0, 0, 0.5),
+                0 5px 20px rgba(0, 0, 0, 0.2);
+
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+
+            z-index: 100;
+        }
+
+        .window.active {
+            display: flex;
+            animation: openWindow 0.25s ease;
+        }
+
+        @keyframes openWindow {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        .window-header {
+            height: 45px;
+            min-height: 45px;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+
+            padding: 0 15px;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 8px;
+        }
+
+        .traffic {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .red {
+            background: #ff5f57;
+        }
+
+        .yellow {
+            background: #febc2e;
+        }
+
+        .green {
+            background: #28c840;
+        }
+
+        .window-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+            font-size: 13px;
+            font-weight: 600;
+
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .window-content {
+            padding: 30px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .window-content h2 {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .window-content h3 {
+            margin: 25px 0 10px;
+        }
+
+        .window-content p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* =========================
+       ABOUT
+    ========================= */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .about-avatar {
+            width: 120px;
+            height: 120px;
+
+            border-radius: 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 50px;
+
+            background: linear-gradient(135deg, #6857ff, #2d8cff);
+
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* =========================
+       PROJECTS
+    ========================= */
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .project {
+            padding: 18px;
+
+            border-radius: 14px;
+
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            transition: 0.2s;
+        }
+
+        .project:hover {
+            background: rgba(255, 255, 255, 0.14);
+            transform: translateY(-3px);
+        }
+
+        .project-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .project h3 {
+            margin: 0 0 7px;
+        }
+
+        .project p {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .tag {
+            padding: 4px 8px;
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* =========================
+       SKILLS
+    ========================= */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            padding: 12px 18px;
+
+            border-radius: 12px;
+
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            transition: 0.2s;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+        /* =========================
+       TERMINAL
+    ========================= */
+
+        .terminal {
+            background: #080808;
+            color: #d6ffd6;
+            font-family: "SFMono-Regular", Consolas, monospace;
+
+            min-height: 100%;
+            padding: 20px;
+
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .terminal .green-text {
+            color: #72ff72;
+        }
+
+        .terminal .blue-text {
+            color: #6bb6ff;
+        }
+
+        /* =========================
+       BUTTON
+    ========================= */
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 20px;
+            padding: 11px 18px;
+
+            border-radius: 10px;
+
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+       DOCK
+    ========================= */
+
+        .dock-container {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            z-index: 9998;
+        }
+
+        .dock {
+            display: flex;
+            align-items: flex-end;
+
+            gap: 8px;
+
+            padding: 8px 12px;
+
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+
+        .dock-item {
+            width: 50px;
+            height: 50px;
+
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 30px;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.18s ease,
+                margin 0.18s ease;
+        }
+
+        .dock-item:hover {
+            transform: translateY(-15px) scale(1.3);
+            margin: 0 8px;
+        }
+
+        /* =========================
+       TOAST
+    ========================= */
+
+        .toast {
+            position: fixed;
+            top: 55px;
+            left: 50%;
+
+            transform: translateX(-50%) translateY(-20px);
+
+            padding: 10px 18px;
+
+            border-radius: 10px;
+
+            background: rgba(20, 20, 25, 0.8);
+
+            backdrop-filter: blur(20px);
+
+            opacity: 0;
+            pointer-events: none;
+
+            transition: 0.3s;
+
+            z-index: 10000;
+
+            font-size: 13px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* =========================
+       MOBILE
+    ========================= */
+
+        @media (max-width: 700px) {
+            .menu-item:not(.important) {
+                display: none;
+            }
+
+            .desktop-icons {
+                right: 12px;
+                top: 50px;
+                gap: 12px;
+            }
+
+            .hero {
+                width: 80%;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .window {
+                top: 55px;
+                width: calc(100vw - 20px);
+                height: calc(100vh - 130px);
+            }
+
+            .window-content {
+                padding: 20px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-avatar {
+                margin: auto;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            .dock {
+                gap: 3px;
+            }
+
+            .dock-item {
+                width: 42px;
+                height: 42px;
+                font-size: 25px;
+            }
+        }
+
+        #contact {
+    width: 500px;
+    max-width: 90vw;
+}
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#contactForm input,
+#contactForm textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#contactForm textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#contactForm button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+    </style>
+</head>
+
+<body>
+    <div class="window" id="contact">
+
+    <div class="window-header">
+        <div class="traffic-lights">
+            <button class="close" onclick="closeWindow('contact')"></button>
+            <button class="minimize"></button>
+            <button class="maximize"></button>
+        </div>
+
+        <span>Contact</span>
+    </div>
+
+    <div class="window-content contact-content">
+
+        <h2>Contact Me</h2>
+
+        <form id="contactForm">
+
+            <input
+                type="text"
+                id="contactName"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                id="contactEmail"
+                placeholder="Your Email"
+                required
+            >
+
+            <textarea
+                id="contactMessage"
+                placeholder="Your Message"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Send Message
+            </button>
+
+        </form>
+
+        <p id="contactStatus"></p>
+
+    </div>
+
+</div>
+    <div class="desktop">
+        <!-- =========================
+       MENU BAR
+  ========================== -->
+
+        <div class="menu-bar">
+            <div class="menu-left">
+                <span class="apple"></span>
+
+                <span class="menu-item important"> Pranav </span>
+
+                <span class="menu-item"> File </span>
+
+                <span class="menu-item"> Edit </span>
+
+                <span class="menu-item"> View </span>
+
+                <span class="menu-item"> Window </span>
+            </div>
+
+            <div class="menu-right">
+                <span>⌁</span>
+                <span>⌁</span>
+                <span>Wi-Fi</span>
+                <span>🔋</span>
+                <span id="clock">8:42 PM</span>
+            </div>
+        </div>
+
+        <!-- =========================
+        DESKTOP ICONS
+    ========================== -->
+
+        <div class="desktop-icons">
+            <div class="desktop-icon" ondblclick="openWindow('about')" onclick="selectIcon(this)">
+                <div class="icon-image">👨‍💻</div>
+                <div class="icon-name">About Me</div>
+            </div>
+
+            <div class="desktop-icon" ondblclick="openWindow('projects')" onclick="selectIcon(this)">
+                <div class="icon-image">📁</div>
+                <div class="icon-name">Projects</div>
+            </div>
+
+            <div class="desktop-icon" ondblclick="openWindow('resume')" onclick="selectIcon(this)">
+                <div class="icon-image">📄</div>
+                <div class="icon-name">Resume</div>
+            </div>
+
+            <div class="desktop-icon" ondblclick="openWindow('skills')" onclick="selectIcon(this)">
+                <div class="icon-image">⚙️</div>
+                <div class="icon-name">Skills</div>
+            </div>
+            
+            <div class="desktop-icon" onclick="openWindow('contact')">
+                <div class="icon-image">✉️</div>
+                <div class="icon-name">Contact</div>
+</div>
+            
+        </div>
+
+        <!-- =========================
+        HERO
+    ========================== -->
+
+        <div class="hero">
+            <div class="hero-avatar">👨‍💻</div>
+
+            <h1>Pranav Kumar</h1>
+
+            <p>Developer • Data Enthusiast • Problem Solver</p>
+
+            <small> Double-click an icon to explore </small>
+        </div>
+
+        <!-- =========================
+        ABOUT WINDOW
+    ========================== -->
+
+        <div class="window" id="about">
+            <div class="window-header">
+                <div class="traffic-lights">
+                    <span class="traffic red" onclick="closeWindow('about')"></span>
+
+                    <span class="traffic yellow"></span>
+
+                    <span class="traffic green"></span>
+                </div>
+
+                <div class="window-title">About Me</div>
+            </div>
+
+            <div class="window-content">
+                <div class="about-grid">
+                    <div class="about-avatar">👨‍💻</div>
+
+                    <div>
+                        <h2>Hey, I'm Pranav 👋</h2>
+
+                        <p>
+                            I'm a developer interested in building useful, modern and
+                            interactive digital experiences.
+                        </p>
+
+                        <p style="margin-top: 12px">
+                            I enjoy working with software development, data, machine
+                            learning and web technologies.
+                        </p>
+                    </div>
+                </div>
+
+                <h3>Currently exploring</h3>
+
+                <p>
+                    Full-stack development • AI • Data Analytics • Machine Learning •
+                    Modern UI/UX
+                </p>
+            </div>
+        </div>
+
+        <!-- =========================
+        PROJECTS WINDOW
+    ========================== -->
+
+        <div class="window" id="projects">
+            <div class="window-header">
+                <div class="traffic-lights">
+                    <span class="traffic red" onclick="closeWindow('projects')"></span>
+
+                    <span class="traffic yellow"></span>
+
+                    <span class="traffic green"></span>
+                </div>
+
+                <div class="window-title">Projects</div>
+            </div>
+
+            <div class="window-content">
+                <h2>My Projects</h2>
+
+                <p style="margin-bottom: 20px">
+                    A selection of things I've built and explored.
+                </p>
+
+                <div class="projects">
+                    <div class="project">
+                        <div class="project-icon">📊</div>
+
+                        <h3>Seasonal Agriculture Analysis</h3>
+
+                        <p>
+                            Analysis of agricultural performance across different seasons
+                            using data analysis techniques.
+                        </p>
+
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Pandas</span>
+                            <span class="tag">Data Analysis</span>
+                        </div>
+
+                        <a class="button" href="https://github.com/echoo2323/Seasonal-Agriculture-Performance-Analysis"
+                            target="_blank">
+                            🐙 GitHub
+                        </a>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-icon">🤖</div>
+
+                        <h3>Machine Learning Project</h3>
+
+                        <p>
+                            A machine learning project focused on extracting useful
+                            predictions from data.
+                        </p>
+
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">ML</span>
+                            <span class="tag">Scikit-learn</span>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-icon">🌐</div>
+
+                        <h3>Portfolio Website</h3>
+
+                        <p>
+                            An interactive macOS-inspired portfolio designed to showcase my
+                            work.
+                        </p>
+
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-icon">💡</div>
+
+                        <h3>More Coming Soon</h3>
+
+                        <p>
+                            I'm continuously experimenting with new technologies and
+                            building new projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================
+        SKILLS WINDOW
+    ========================== -->
+
+        <div class="window" id="skills">
+            <div class="window-header">
+                <div class="traffic-lights">
+                    <span class="traffic red" onclick="closeWindow('skills')"></span>
+
+                    <span class="traffic yellow"></span>
+
+                    <span class="traffic green"></span>
+                </div>
+
+                <div class="window-title">System Settings</div>
+            </div>
+
+            <div class="window-content">
+                <h2>Skills</h2>
+
+                <p>Technologies and tools I work with.</p>
+
+                <h3>Languages</h3>
+
+                <div class="skills">
+                    <span class="skill">Python</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Java</span>
+                    <span class="skill">SQL</span>
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                </div>
+
+                <h3>Data & AI</h3>
+
+                <div class="skills">
+                    <span class="skill">Pandas</span>
+                    <span class="skill">NumPy</span>
+                    <span class="skill">Matplotlib</span>
+                    <span class="skill">Machine Learning</span>
+                </div>
+
+                <h3>Tools</h3>
+
+                <div class="skills">
+                    <span class="skill">Git</span>
+                    <span class="skill">GitHub</span>
+                    <span class="skill">VS Code</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================
+        RESUME WINDOW
+    ========================== -->
+
+        <div class="window" id="resume">
+            <div class="window-header">
+                <div class="traffic-lights">
+                    <span class="traffic red" onclick="closeWindow('resume')"></span>
+
+                    <span class="traffic yellow"></span>
+
+                    <span class="traffic green"></span>
+                </div>
+
+                <div class="window-title">Resume.pdf</div>
+            </div>
+
+            <div class="window-content">
+                <h2>Resume</h2>
+
+                <p>
+                    Want to know more about my education, projects and technical
+                    experience?
+                </p>
+
+                <a class="button" href="#" onclick="showToast('Add your resume PDF link here')">
+                    📄 Open Resume
+                </a>
+
+                <h3>Education</h3>
+
+                <p>
+                    <strong>NIET</strong><br />
+                    Add your degree, branch and graduation year here.
+                </p>
+
+                <h3>Career</h3>
+
+                <p>Add your internships, experience and achievements here.</p>
+            </div>
+        </div>
+
+        <!-- =========================
+        TERMINAL WINDOW
+    ========================== -->
+
+        <div class="window" id="terminal">
+            <div class="window-header">
+                <div class="traffic-lights">
+                    <span class="traffic red" onclick="closeWindow('terminal')"></span>
+
+                    <span class="traffic yellow"></span>
+
+                    <span class="traffic green"></span>
+                </div>
+
+                <div class="window-title">Terminal</div>
+            </div>
+
+            <div class="window-content terminal">
+                <div>
+                    <span class="green-text"> pranav@portfolio </span>
+                    :
+                    <span class="blue-text">~</span>
+                    $ whoami
+                </div>
+
+                <div>Pranav Kumar</div>
+
+                <br />
+
+                <div>
+                    <span class="green-text"> pranav@portfolio </span>
+                    :
+                    <span class="blue-text">~</span>
+                    $ cat about.txt
+                </div>
+
+                <div>Developer building things with code, data and curiosity.</div>
+
+                <br />
+
+                <div>
+                    <span class="green-text"> pranav@portfolio </span>
+                    :
+                    <span class="blue-text">~</span>
+                    $ ls
+                </div>
+
+                <div>
+                    about/ &nbsp; projects/ &nbsp; skills/ &nbsp; resume/ &nbsp;
+                    contact/
+                </div>
+
+                <br />
+
+                <div>
+                    <span class="green-text"> pranav@portfolio </span>
+                    :
+                    <span class="blue-text">~</span>
+                    $
+                    <span class="cursor">▋</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================
+        DOCK
+    ========================== -->
+
+        <div class="dock-container">
+            <div class="dock">
+                
+
+                <div class="dock-item" title="About" onclick="openWindow('about')">
+                    👨‍💻
+                </div>
+
+                <div class="dock-item" title="Projects" onclick="openWindow('projects')">
+                    📁
+                </div>
+
+                <div class="dock-item" title="Skills" onclick="openWindow('skills')">
+                    ⚙️
+                </div>
+
+                
+
+                <div class="dock-item" title="GitHub" onclick="window.open('https://github.com/echoo2323', '_blank')">
+                    🐙
+                </div>
+
+                <div class="dock-item" title="LinkedIn" onclick="openLinkedIn('https://www.linkedin.com/in/pranav-kumar-0b9139300')">
+                    💼
+                </div>
+
+                <div class="dock-item" title="Email" onclick="window.location.href = 'mailto:your@email.com'">
+                    ✉️
+                </div>
+
+                <div class="dock-item" title="Resume" onclick="openWindow('resume')">
+                    📄
+                </div>
+
+                <div class="dock-item" title="Trash" onclick="showToast('Trash is empty 🗑️')">
+                    🗑️
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================
+        TOAST
+    ========================== -->
+
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script>
+        /* =========================
+        OPEN WINDOW
+    ========================== */
+
+        function openWindow(id) {
+            const windowElement = document.getElementById(id);
+
+            if (!windowElement) return;
+
+            windowElement.classList.add("active");
+
+            bringToFront(windowElement);
+        }
+
+        /* =========================
+    CLOSE WINDOW
+    ========================== */
+
+        function closeWindow(id) {
+            const windowElement = document.getElementById(id);
+
+            if (!windowElement) return;
+
+            windowElement.classList.remove("active");
+        }
+
+        /* =========================
+        BRING WINDOW TO FRONT
+    ========================== */
+
+        let highestZ = 100;
+
+        function bringToFront(element) {
+            highestZ++;
+
+            element.style.zIndex = highestZ;
+        }
+
+        document.querySelectorAll(".window").forEach((windowElement) => {
+            windowElement.addEventListener("mousedown", () =>
+                bringToFront(windowElement),
+            );
+        });
+
+        /* =========================
+        DESKTOP ICON SELECTION
+    ========================== */
+
+        function selectIcon(element) {
+            document.querySelectorAll(".desktop-icon").forEach((icon) => {
+                icon.classList.remove("selected");
+            });
+
+            element.classList.add("selected");
+        }
+
+        /* =========================
+        CLOCK
+    ========================== */
+
+        function updateClock() {
+            const now = new Date();
+
+            let hours = now.getHours();
+
+            const minutes = String(now.getMinutes()).padStart(2, "0");
+
+            const ampm = hours >= 12 ? "PM" : "AM";
+
+            hours = hours % 12 || 12;
+
+            document.getElementById("clock").textContent =
+                `${hours}:${minutes} ${ampm}`;
+        }
+
+        updateClock();
+
+        setInterval(updateClock, 1000);
+
+        /* =========================
+        TOAST
+    ========================== */
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+
+            toast.textContent = message;
+
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+        }
+
+        /* =========================
+        LINKEDIN
+    ========================== */
+
+        function openLinkedIn(url) {
+            /*
+            Replace this with your actual LinkedIn URL.
+        */
+
+            window.open(url, "_blank");
+        }
+
+        /* =========================
+        ESC CLOSE
+    ========================== */
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                document
+                    .querySelectorAll(".window.active")
+                    .forEach((windowElement) => {
+                        windowElement.classList.remove("active");
+                    });
+            }
+        });
+
+        /* =========================
+        CLICK DESKTOP
+        ========================== */
+
+        document.querySelector(".desktop").addEventListener("click", (event) => {
+            if (
+                event.target.classList.contains("desktop") ||
+                event.target.classList.contains("hero")
+            ) {
+                document.querySelectorAll(".desktop-icon").forEach((icon) => {
+                    icon.classList.remove("selected");
+                });
+            }
+        });
+
+        document.getElementById("contactForm").addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const name = document.getElementById("contactName").value;
+        const email = document.getElementById("contactEmail").value;
+        const message = document.getElementById("contactMessage").value;
+
+        const status = document.getElementById("contactStatus");
+
+        try {
+
+            const response = await fetch(
+                "http://localhost:5000/api/contact",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        message: message
+                    })
+                }
+            );
+
+            const data = await response.json();
+
+            if (response.ok) {
+
+                status.textContent = "Message sent successfully!";
+
+                document.getElementById("contactForm").reset();
+
+            } else {
+
+                status.textContent = data.message;
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            status.textContent =
+                "Unable to connect to the server.";
+
+        }
+
+    });
+    </script>
+</body>
+</html>
